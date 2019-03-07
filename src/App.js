@@ -1,26 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Menu from './components/Menu';
+import routes from './routes';
+
+
+
 
 class App extends Component {
+
+
+  showContentMenus = (routes) => {
+    let result = null;
+    if (routes.length > 0) {
+      result = routes.map((route, index) => {
+        return (
+          <Route
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            component={route.main}
+          />
+        )
+      });
+    }
+    return result;
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <div className="App">
+
+          <Menu />
+
+          <Switch> {/* TAMBAHKAN SWITCH UNTUK NotFound */}
+            {this.showContentMenus(routes)}
+          </Switch>
+
+        </div>
+      </Router>
     );
   }
 }

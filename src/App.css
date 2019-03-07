@@ -31,3 +31,8 @@
     transform: rotate(360deg);
   }
 }
+
+.active-navlink {
+  background-color: aqua !important;
+  color: black !important;
+}
